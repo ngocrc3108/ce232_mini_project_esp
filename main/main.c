@@ -5,15 +5,12 @@
 
 #define SENSOR_TYPE DHT_TYPE_AM2301
 #define CONFIG_EXAMPLE_DATA_GPIO 4
-//#define CONFIG_EXAMPLE_INTERNAL_PULLUP
 
 void dht_test(void *pvParameters)
 {
     float temperature, humidity;
 
-#ifdef CONFIG_EXAMPLE_INTERNAL_PULLUP
     gpio_set_pull_mode(CONFIG_EXAMPLE_DATA_GPIO, GPIO_PULLUP_ONLY);
-#endif
 
     while (1)
     {
