@@ -44,7 +44,7 @@
 #include <string.h>
 #include <esp_log.h>
 #include <ets_sys.h>
-#include <esp_idf_lib_helpers.h>
+#include <esp32/rom/ets_sys.h>
 
 // DHT timer precision in microseconds
 #define DHT_TIMER_INTERVAL 2
@@ -81,15 +81,9 @@
 
 static const char *TAG = "dht";
 
-#if HELPER_TARGET_IS_ESP32
 static portMUX_TYPE mux = portMUX_INITIALIZER_UNLOCKED;
 #define PORT_ENTER_CRITICAL() portENTER_CRITICAL(&mux)
 #define PORT_EXIT_CRITICAL() portEXIT_CRITICAL(&mux)
-
-#elif HELPER_TARGET_IS_ESP8266
-#define PORT_ENTER_CRITICAL() portENTER_CRITICAL()
-#define PORT_EXIT_CRITICAL() portEXIT_CRITICAL()
-#endif
 
 #define CHECK_ARG(VAL) do { if (!(VAL)) return ESP_ERR_INVALID_ARG; } while (0)
 
