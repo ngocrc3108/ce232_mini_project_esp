@@ -13,7 +13,7 @@
 #include "esp_event.h"
 
 #define MQTT_URL            "mqtt://mqtt.flespi.io"
-#define MQTT_TOKEN          "BxT1pM1l2lJaExcxJm6TiSs37y1j4C1AiUIQAK2bJw84Gc4JcNgfDZ32lnlOrt66"
+#define MQTT_TOKEN          "XQ451T4HH2djXBkDywkTRfWpDjfQlbeyaFinUbVdbhDN3WUaJkcjb20wLSr57VXU"
 
 void log_error_if_nonzero(const char *message, int error_code);
 
