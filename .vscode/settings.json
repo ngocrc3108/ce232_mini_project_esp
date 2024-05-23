@@ -17,6 +17,8 @@
     "idf.toolsPathWin": "C:\\Espressif\\tools",
     "idf.flashType": "UART",
     "files.associations": {
-        "ets_sys.h": "c"
+        "ets_sys.h": "c",
+        "wifi.h": "c",
+        "mqtt.h": "c"
     }
 }
