@@ -12,7 +12,7 @@
 #define SENSOR_TYPE DHT_TYPE_AM2301
 #define CONFIG_EXAMPLE_DATA_GPIO 4
 
-void dht_test(void *pvParameters)
+void dht_read_task(void *pvParameters)
 {
     float temperature, humidity;
 
@@ -38,7 +38,7 @@ void dht_test(void *pvParameters)
 
         // If you read the sensor data too often, it will heat up
         // http://www.kandrsmith.org/RJS/Misc/Hygrometers/dht_sht_how_fast.html
-        vTaskDelay(pdMS_TO_TICKS(5000));
+        vTaskDelay(pdMS_TO_TICKS(10000));
     }
 }
 
@@ -47,5 +47,5 @@ void app_main() {
     mqtt_app_start();
     i2c_master_init();
     ssd1306_init();
-    xTaskCreate(dht_test, "dht_test", configMINIMAL_STACK_SIZE * 3, NULL, 5, NULL);
+    xTaskCreate(dht_read_task, "dht_read_task", configMINIMAL_STACK_SIZE * 3, NULL, 5, NULL);
 }
