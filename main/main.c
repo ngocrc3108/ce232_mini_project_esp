@@ -43,9 +43,16 @@ void dht_read_task(void *pvParameters)
 }
 
 void app_main() {
-    wifi_init_sta();
-    mqtt_app_start();
     i2c_master_init();
-    ssd1306_init();
+    if(ssd1306_init() != ESP_OK)
+        return;
+
+    if(wifi_init_sta() != ESP_OK) {
+        ssd1306_display_clear();
+        ssd1306_display_text("wifi fail");
+        return;
+    }
+
+    mqtt_app_start();
     xTaskCreate(dht_read_task, "dht_read_task", configMINIMAL_STACK_SIZE * 3, NULL, 5, NULL);
 }

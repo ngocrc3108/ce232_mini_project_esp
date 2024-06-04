@@ -28,7 +28,7 @@ void i2c_master_init()
 	i2c_driver_install(I2C_NUM_0, I2C_MODE_MASTER, 0, 0, 0);
 }
 
-void ssd1306_init() {
+esp_err_t ssd1306_init() {
 	esp_err_t espRc;
 
 	i2c_cmd_handle_t cmd = i2c_cmd_link_create();
@@ -55,6 +55,7 @@ void ssd1306_init() {
 		ESP_LOGE(TAG, "OLED configuration failed. code: 0x%.2X", espRc);
 	}
 	i2c_cmd_link_delete(cmd);
+	return espRc;
 }
 
 void ssd1306_display_text(const void *arg_text) {

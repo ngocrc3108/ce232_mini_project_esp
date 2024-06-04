@@ -40,7 +40,7 @@ void event_handler(void* arg, esp_event_base_t event_base,
     }
 }
 
-void wifi_init_sta(void)
+esp_err_t wifi_init_sta(void)
 {
     ESP_ERROR_CHECK(nvs_flash_init());
     ESP_ERROR_CHECK(esp_netif_init());
@@ -99,10 +99,13 @@ void wifi_init_sta(void)
     if (bits & WIFI_CONNECTED_BIT) {
         ESP_LOGI(TAG, "connected to ap SSID:%s password:%s",
                  WIFI_SSID, WIFI_PASS);
+        return ESP_OK;
     } else if (bits & WIFI_FAIL_BIT) {
-        ESP_LOGI(TAG, "Failed to connect to SSID:%s, password:%s",
+        ESP_LOGE(TAG, "Failed to connect to SSID:%s, password:%s",
                  WIFI_SSID, WIFI_PASS);
+        return ESP_ERR_TIMEOUT;
     } else {
         ESP_LOGE(TAG, "UNEXPECTED EVENT");
     }
+    return ESP_FAIL;
 }

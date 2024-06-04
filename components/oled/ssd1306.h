@@ -44,7 +44,7 @@
 #define OLED_CMD_SET_CHARGE_PUMP        0x8D    // follow with 0x14
 
 void i2c_master_init();
-void ssd1306_init();
+esp_err_t ssd1306_init();
 void ssd1306_display_clear();
 void ssd1306_display_text(const void *arg_text);
 
